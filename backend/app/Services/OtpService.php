@@ -50,17 +50,4 @@ class OtpService
 
         return $oneTimePassword;
     }
-
-    public function verifyToken(string $token): OneTimePassword
-    {
-        $oneTimePassword = OneTimePassword::query()
-            ->where('token', $token)
-            ->where('expires_at', '>', now())
-            ->whereNotNull('code_used_at')
-            ->first();
-
-        throw_if(is_null($oneTimePassword), new InvalidOtpException);
-
-        return $oneTimePassword;
-    }
 }
