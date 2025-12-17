@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\OtpPurpose;
 use App\Exceptions\InvalidOtpException;
 use App\Jobs\SendOtp;
 use App\Models\OneTimePassword;
@@ -26,9 +25,7 @@ class OtpService
         );
 
         try {
-            $user = User::where('email', $email)->first();
-
-            throw_unless($user->is_active);
+            $user = User::where('email', $email)->firstOrFail();
         } catch (Throwable) {
             $user = null;
         }

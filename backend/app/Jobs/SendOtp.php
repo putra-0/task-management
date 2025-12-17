@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Enums\OtpPurpose;
 use App\Helpers\NumberHelper;
 use App\Helpers\QueryHelper;
 use App\Mail\OtpRequested;
