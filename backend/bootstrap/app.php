@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ResponseCode;
+use App\Http\Middleware\VerifyUserRequest;
 use App\Services\ResponseService;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         using: function () {
-            Route::middleware('api')
+            Route::middleware(['api', 'verify.user'])
                 ->prefix('api/v1')
                 ->group(base_path('routes/api_v1.php'));
         },
@@ -25,7 +26,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'verify.user' => VerifyUserRequest::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $responseService = app(ResponseService::class);
