@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ListController;
 use App\Http\Controllers\Api\V1\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +25,10 @@ Route::controller(TaskController::class)
         Route::post('', 'store');
         Route::put('{uuid}', 'update');
         Route::delete('{uuid}', 'destroy');
+    });
+
+Route::controller(ListController::class)
+    ->prefix('lists')
+    ->group(function () {
+        Route::get('task-statuses', 'getTaskStatuses');
     });
