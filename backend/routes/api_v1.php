@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)
@@ -14,4 +15,10 @@ Route::controller(AuthController::class)
 
         Route::post('logout', 'logout')->name('logout');
         Route::get('profile', 'getProfile');
+    });
+
+Route::controller(TaskController::class)
+    ->prefix('tasks')
+    ->group(function () {
+        Route::get('', 'index');
     });
