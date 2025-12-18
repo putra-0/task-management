@@ -12,13 +12,7 @@ export interface TableParams {
   page: number;
   perPage: number;
   sort: Sort[];
-  startDate: string | null;
-  endDate: string | null;
-  searchBy: string;
-  searchQuery?: string;
-  shouldExport?: number;
-  transactionType?: string;
-  type?: string;
+  status?: string;
 }
 
 export type Sort = {

@@ -12,7 +12,7 @@ export interface UserProfile extends ResponseApi {
   email: string;
 }
 
-export interface WalletType {
-  uuid: string;
+export interface TaskStatus {
+  code: string;
   name: string;
 }
