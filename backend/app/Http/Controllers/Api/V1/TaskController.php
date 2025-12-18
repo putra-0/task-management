@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\ResponseCode;
+use App\Exceptions\DataNotFoundException;
 use App\Helpers\DateHelper;
+use App\Helpers\QueryHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Task\IndexRequest;
+use App\Http\Requests\Api\V1\Task\StoreRequest;
+use App\Http\Requests\Api\V1\Task\UpdateRequest;
 use App\Models\Task;
 use App\Services\ResponseService;
 use App\Services\UserService;
@@ -46,5 +51,56 @@ class TaskController extends Controller
             ]);
 
         return $this->responseService->paginate($tasks);
+    }
+
+    public function store(StoreRequest $request)
+    {
+        QueryHelper::retryOnDuplicate(fn() => Task::create([
+            'uuid' => str()->uuid(),
+            'status' => $request->input('status'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'deadline' => $request->input('deadline'),
+            'user_id' => $this->userService->getFromRequest()->id,
+        ]));
+
+        return $this->responseService->generate(
+            code: ResponseCode::Ok,
+            message: 'Task has been created'
+        );
+    }
+
+    public function update(UpdateRequest $request, string $uuid)
+    {
+        $task = Task::where('uuid', $uuid)
+            ->where('user_id', $this->userService->getFromRequest()->id)
+            ->first();
+
+        throw_if(is_null($task), new DataNotFoundException('Task'));
+
+        $task->update([
+            'status' => $request->input('status'),
+        ]);
+
+        return $this->responseService->generate(
+            code: ResponseCode::Ok,
+            message: 'Task has been updated'
+        );
+    }
+
+    public function destroy(string $uuid)
+    {
+        $task = Task::where('uuid', $uuid)
+            ->where('user_id', $this->userService->getFromRequest()->id)
+            ->first();
+
+        throw_if(is_null($task), new DataNotFoundException('Task'));
+
+        $task->delete();
+
+        return $this->responseService->generate(
+            code: ResponseCode::Ok,
+            message: 'Task has been deleted'
+        );
     }
 }

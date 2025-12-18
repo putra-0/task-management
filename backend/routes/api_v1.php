@@ -21,4 +21,7 @@ Route::controller(TaskController::class)
     ->prefix('tasks')
     ->group(function () {
         Route::get('', 'index');
+        Route::post('', 'store');
+        Route::put('{uuid}', 'update');
+        Route::delete('{uuid}', 'destroy');
     });
