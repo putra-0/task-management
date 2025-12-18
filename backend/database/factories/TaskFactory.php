@@ -23,8 +23,8 @@ class TaskFactory extends Factory
         return [
             'uuid' => fake()->unique()->uuid(),
             'status' => fake()->randomElement(TaskStatus::cases()),
-            'title' => fake()->sentence(),
-            'description' => fake()->optional()->paragraph(),
+            'title' => fake()->sentence(2),
+            'description' => fake()->optional()->sentence(5),
             'created_at' => fake()->dateTimeBetween('-1 year'),
         ];
     }
