@@ -50,7 +50,7 @@ export function LoginForm({
               </Field>
 
               <Field>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <FieldLabel>Password</FieldLabel>
                   <Link
                     href="/forgot-password"
@@ -58,7 +58,7 @@ export function LoginForm({
                   >
                     Forgot password?
                   </Link>
-                </div>
+                </div> */}
 
                 <div className="relative">
                   <Input
