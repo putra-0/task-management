@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('status', 2)->index();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->dateTime('deadline')->nullable();
+            $table->dateTime('deadline');
             $table->foreignId('user_id')->index()->constrained();
             $table->softDeletes();
             $table->timestamps();

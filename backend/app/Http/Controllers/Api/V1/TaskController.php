@@ -24,19 +24,12 @@ class TaskController extends Controller
 
     public function index(IndexRequest $request)
     {
-        $sort = $request->array('sort');
-
         $tasks = Task::query()
             ->where('user_id', $this->userService->getfromRequest()->id)
-            ->when($sort !== [], function (Builder $query) use ($sort) {
-                foreach ($sort as $item) {
-                    $query->orderBy(str()->snake($item['by']), $item['direction']);
-                }
-            })
             ->when($request->filled('status'), function (Builder $query) use ($request) {
                 $query->where('status', $request->input('status'));
             })
-            ->orderBy('id')
+            ->orderBy('deadline')
             ->paginate($request->integer('perPage'))
             ->through(fn($item) => [
                 'uuid' => $item->uuid,
@@ -60,7 +53,7 @@ class TaskController extends Controller
             'status' => $request->input('status'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'deadline' => $request->input('deadline'),
+            'deadline' => $request->date('deadline', 'Y-m-d H:i:s'),
             'user_id' => $this->userService->getFromRequest()->id,
         ]));
 

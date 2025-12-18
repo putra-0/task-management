@@ -20,20 +20,16 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $datetime = fake()->dateTimeBetween('-1 year');
+
         return [
             'uuid' => fake()->unique()->uuid(),
             'status' => fake()->randomElement(TaskStatus::cases()),
             'title' => fake()->sentence(2),
             'description' => fake()->optional()->sentence(5),
-            'created_at' => fake()->dateTimeBetween('-1 year'),
+            'created_at' => $datetime,
+            'deadline' => (clone $datetime)->add(new DateInterval('PT1H')),
         ];
-    }
-
-    public function withDeadline(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'deadline' => (clone $attributes['created_at'])->add(new DateInterval('PT2H')),
-        ]);
     }
 
     public function configure()

@@ -26,7 +26,6 @@ class IndexRequest extends FormRequest
     {
         return array_merge(
             $this->pagination(),
-            $this->sort('deadline'),
             $this->taskStatus(isRequired: false)
         );
     }

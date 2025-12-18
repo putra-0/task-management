@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             [
                 'title' => ['bail', 'required', 'string', 'max:255'],
                 'description' => ['bail', 'sometimes', 'nullable', 'string'],
-                'deadline' => ['bail', 'sometimes', 'nullable', 'date_format:Y-m-d H:i:s', 'after:now'],
+                'deadline' => ['bail', 'required', 'date_format:Y-m-d H:i:s', 'after:now'],
             ]
         );
     }
