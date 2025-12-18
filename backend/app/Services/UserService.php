@@ -65,7 +65,7 @@ class UserService
         );
     }
 
-    public function generateAccessToken(User $user, RefreshToken $refreshToken, int $expiresIn = 900): array
+    public function generateAccessToken(User $user, RefreshToken $refreshToken, int $expiresIn = 3_600): array
     {
         return [
             'accessToken' => SecurityHelper::generateJwt(
