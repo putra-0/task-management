@@ -16,15 +16,11 @@ import { AddFormDialog } from "./add-form-dialog";
 export default function TableTasks() {
   const { data, isLoading, isRefetching } = useTasks();
 
-  const {
-    dialog,
-    isLoading: isLoadingAdd,
-    setDialog,
-    onSubmit,
-  } = useAddTask();
+  const { dialog, isLoading: isLoadingAdd, setDialog, onSubmit } = useAddTask();
 
-  const [, setRowAction] =
-    React.useState<DataTableRowAction<Task> | null>(null);
+  const [, setRowAction] = React.useState<DataTableRowAction<Task> | null>(
+    null
+  );
 
   const columns = getTaskTableColumns({ setRowAction });
   const { table } = useDataTable({
@@ -65,7 +61,15 @@ export default function TableTasks() {
         open={dialog}
         isLoadingSubmit={isLoadingAdd}
         onOpenChange={(open) => setDialog(open)}
-        onSubmit={(data, setError) => onSubmit(data, setError)}
+        onSubmit={(data, setError) =>
+          onSubmit(
+            {
+              ...data,
+              description: data.description ?? "",
+            },
+            setError
+          )
+        }
       />
     </>
   );

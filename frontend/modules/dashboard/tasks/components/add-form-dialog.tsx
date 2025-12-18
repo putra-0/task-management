@@ -63,7 +63,7 @@ interface Props {
       title: string;
       description?: string | null;
       status: string;
-      deadline: string; // Y-m-d H:i:s
+      deadline: string;
     },
     setError: UseFormSetError<TaskFormSchema>
   ) => void;
