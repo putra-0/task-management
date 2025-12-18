@@ -18,7 +18,6 @@ Konfigurasikan file .env sesuai environment lokal:
 - APP_NAME=TaskManagement
 - APP_ENV=local
 - APP_DEBUG=true
-- APP_TIMEZONE=Asia/Jakarta
 - APP_URL=http://127.0.0.1:8000
 - DB_CONNECTION=pgsql
 - DB_HOST=127.0.0.1
