@@ -29,6 +29,7 @@ class TaskController extends Controller
             ->when($request->filled('status'), function (Builder $query) use ($request) {
                 $query->where('status', $request->input('status'));
             })
+            ->orderByRaw('deadline < ? ASC', [now()])
             ->orderBy('deadline')
             ->paginate($request->integer('perPage'))
             ->through(fn($item) => [

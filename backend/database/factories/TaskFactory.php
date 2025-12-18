@@ -28,7 +28,7 @@ class TaskFactory extends Factory
             'title' => fake()->sentence(2),
             'description' => fake()->optional()->sentence(5),
             'created_at' => $datetime,
-            'deadline' => (clone $datetime)->add(new DateInterval('PT1H')),
+            'deadline' => (clone $datetime)->add(new DateInterval('PT3H')),
         ];
     }
 
