@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('deadline')->nullable();
             $table->foreignId('user_id')->index()->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
