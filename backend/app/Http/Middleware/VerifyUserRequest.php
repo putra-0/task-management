@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Helpers\SecurityHelper;
 use App\Models\RefreshToken;
 use App\Models\User;
+use App\Services\UserService;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ use Throwable;
 
 class VerifyUserRequest
 {
+    public function __construct(
+        private UserService $userService
+    ) {}
+
     /**
      * Handle an incoming request.
      *
@@ -42,6 +47,8 @@ class VerifyUserRequest
         } catch (Throwable) {
             throw new AuthenticationException();
         }
+
+        $this->userService->setToRequest($user);
 
         if ($request->routeIs('logout')) {
             return $next($request->merge([
