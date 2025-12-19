@@ -12,15 +12,16 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useAddTask } from "../hooks/use-add-task";
 import { AddFormDialog } from "./add-form-dialog";
+import { useUpdateTask } from "../hooks/use-update-task";
+import { UpdateFormDialog } from "./update-form-dialog";
 
 export default function TableTasks() {
   const { data, isLoading, isRefetching } = useTasks();
-
   const { dialog, isLoading: isLoadingAdd, setDialog, onSubmit } = useAddTask();
+  const { isLoading: isLoadingUpdate, onUpdateSubmit } = useUpdateTask();
 
-  const [, setRowAction] = React.useState<DataTableRowAction<Task> | null>(
-    null
-  );
+  const [rowAction, setRowAction] =
+    React.useState<DataTableRowAction<Task> | null>(null);
 
   const columns = getTaskTableColumns({ setRowAction });
   const { table } = useDataTable({
@@ -69,6 +70,16 @@ export default function TableTasks() {
             },
             setError
           )
+        }
+      />
+
+      <UpdateFormDialog
+        currentRow={rowAction?.row.original}
+        open={rowAction?.variant === "update"}
+        isLoadingSubmit={isLoadingUpdate}
+        onOpenChange={() => setRowAction(null)}
+        onSubmit={(uuid, data, setError) =>
+          onUpdateSubmit(uuid, data, setError, () => setRowAction(null))
         }
       />
     </>
