@@ -131,26 +131,8 @@ Password : password
 
 ---
 
-## 7. API Testing with Postman
-
-This project provides a Postman collection to test all available API endpoints.
-
-### Import Postman Collection
-1. Open Postman
-2. Click **Import**
-3. Select the Postman collection file from the repository:
-   - `Task_Management_API.postman_collection.json`
-
-### Base URL
-```text
-http://127.0.0.1:8000/api/v1
-```
-
-### Authentication
-
-```text
-Authorization: Bearer <your-token>
-```
+## 7. Postman Collection
+Postman collection for testing the API endpoints is available [here](./Task_Management_API.postman_collection.json). Import this file into Postman to access all the API routes for testing.``
 
 ---
 
