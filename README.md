@@ -146,6 +146,9 @@ Screenshots are stored in the `screenshot` directory.
 ### Register
 ![Register](./screenshot/register.png)
 
+### Verify OTP
+![Verify OTP](./screenshot/verify-otp.png)
+
 ### Dashboard
 ![Dashboard](./screenshot/dashboard.png)
 
