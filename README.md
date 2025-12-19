@@ -139,7 +139,7 @@ This project provides a Postman collection to test all available API endpoints.
 1. Open Postman
 2. Click **Import**
 3. Select the Postman collection file from the repository:
-   - `postman/Task_Management_API.postman_collection.json`
+   - `Task_Management_API.postman_collection.json`
 
 ### Base URL
 ```text
