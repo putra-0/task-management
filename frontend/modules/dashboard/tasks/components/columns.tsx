@@ -129,6 +129,11 @@ export function getTaskTableColumns({
               >
                 Edit
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onSelect={() => setRowAction({ row, variant: "delete" })}
+              >
+                Delete
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );

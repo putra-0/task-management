@@ -14,11 +14,14 @@ import { useAddTask } from "../hooks/use-add-task";
 import { AddFormDialog } from "./add-form-dialog";
 import { useUpdateTask } from "../hooks/use-update-task";
 import { UpdateFormDialog } from "./update-form-dialog";
+import { DeleteConfirmDialog } from "./delete-form-dialog";
+import { useDeleteTask } from "../hooks/use-delete-task";
 
 export default function TableTasks() {
   const { data, isLoading, isRefetching } = useTasks();
   const { dialog, isLoading: isLoadingAdd, setDialog, onSubmit } = useAddTask();
   const { isLoading: isLoadingUpdate, onUpdateSubmit } = useUpdateTask();
+  const { isLoading: isLoadingDelete, onDeleteSubmit } = useDeleteTask();
 
   const [rowAction, setRowAction] =
     React.useState<DataTableRowAction<Task> | null>(null);
@@ -81,6 +84,14 @@ export default function TableTasks() {
         onSubmit={(uuid, data, setError) =>
           onUpdateSubmit(uuid, data, setError, () => setRowAction(null))
         }
+      />
+
+      <DeleteConfirmDialog
+        currentRow={rowAction?.row.original}
+        open={rowAction?.variant === "delete"}
+        isLoading={isLoadingDelete}
+        onOpenChange={() => setRowAction(null)}
+        onConfirm={(uuid) => onDeleteSubmit(uuid, () => setRowAction(null))}
       />
     </>
   );
