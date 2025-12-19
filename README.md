@@ -132,7 +132,7 @@ Password : password
 ---
 
 ## 7. Postman Collection
-Postman collection for testing the API endpoints is available [here](./Task_Management_API.postman_collection.json). Import this file into Postman to access all the API routes for testing.``
+Postman collection for testing the API endpoints is available [here](./Task_Management_API.postman_collection.json). Import this file into Postman to access all the API routes for testing.
 
 ---
 
