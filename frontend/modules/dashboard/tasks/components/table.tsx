@@ -47,7 +47,7 @@ export default function TableTasks() {
       <div className="container min-w-full mx-auto mt-3">
         <div className="mb-5 flex flex-wrap items-center justify-between space-y-2">
           <div>
-            <h2 className="page-header">Providers</h2>
+            <h2 className="page-header">Tasks</h2>
           </div>
           <div className="flex gap-2">
             <Button className="space-x-1" onClick={() => setDialog(true)}>
