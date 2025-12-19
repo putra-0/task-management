@@ -20,7 +20,7 @@ class ListController extends Controller
             data: [
                 'items' => collect(TaskStatus::cases())->transform(fn($item) => [
                     'code' => $item->value,
-                    'name' => $item->name,
+                    'name' => $item->getName(),
                 ]),
             ]
         );
