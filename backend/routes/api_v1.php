@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\ListController;
+use App\Http\Controllers\Api\V1\SummaryController;
 use App\Http\Controllers\Api\V1\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,10 @@ Route::controller(ListController::class)
     ->prefix('lists')
     ->group(function () {
         Route::get('task-statuses', 'getTaskStatuses');
+    });
+
+Route::controller(SummaryController::class)
+    ->prefix('summaries')
+    ->group(function () {
+        Route::get('total-tasks-by-status', 'getTotalTasksbyStatus');
     });
